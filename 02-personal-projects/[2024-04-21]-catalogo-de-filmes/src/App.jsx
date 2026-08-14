@@ -22,9 +22,11 @@ export default function App() {
     },[categoria])
 
 
-    const filtrados = dado.filter( (item) =>
+      const filtrados = dado.filter( (item) =>
       item.title.toLowerCase().includes(filmes.toLowerCase())
     );
+
+    
      
   return (
     <>
@@ -44,12 +46,12 @@ export default function App() {
 
     <S.sectionFilmes>
       {
-       
+      
         filtrados.map((item) => (
-            <div>
+          <div>
             <img src={item.posterURL} alt="" />
             <figcaption>{item.title}</figcaption>
-          </div>  
+          </div> 
         ))
       }
       </S.sectionFilmes>

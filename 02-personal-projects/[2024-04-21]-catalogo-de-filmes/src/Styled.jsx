@@ -7,6 +7,7 @@ justify-content: center;
 justify-content: space-between;
 align-items: center;
 position: fixed;
+z-index: 100;
 background-color: aliceblue;
 
 h2 {
@@ -53,8 +54,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-wrap: wrap;
-margin-top: 8%;
-padding-top: 2%;
+padding-top: 10%;
 background-color: black;
 
 div {
