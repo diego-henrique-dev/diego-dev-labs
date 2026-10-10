@@ -72,7 +72,7 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
    Com tudo feito, agora é só clonar o repositório digitando o código abaixo:
    
    ```bash
-   git clone https://github.com/Diego1601/diego-dev-labs.git
+   git clone https://github.com/diego-henrique-dev/diego-dev-labs.git
 
 
 3. **Entre na pasta pelo VsCode**
@@ -120,7 +120,7 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 
 **Diego Henrique**  
 🔗 [LinkedIn](https://www.linkedin.com/in/diegohenrique97/)  
-🐙 [GitHub](https://github.com/Diego1601)
+🐙 [GitHub](https://github.com/diego-henrique-dev)
 
 
 ## 📝 Licença

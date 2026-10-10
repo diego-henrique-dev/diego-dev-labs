@@ -1,0 +1,66 @@
+ANALISADOR - é um sistema web que oferece opções de linguagens "php, JS, java" que vai gerar pequenos scripts de código da respectiva linguagem para o usuário analisar e responder a essa análise do que o código faz. O software terá conexão com uma IA para gerar os scripts e dar o feedback da resposta. 
+
+
+
+REQUISITOS NÃO FUNCIONAIS:
+
+	1º deve conter uma section com as opções de linguagem para selecionar.
+	2º deve conter uma section com as opções de níveis de dificuldade "básico", "intermediário" e "avançado". 
+	3º deve conter uma section para geração do contexto e do script. 
+	4º deve conter um campo "input" para o usuário escrever a resposta da análise do script. 
+	5º deve conter uma section para o feedack da IA.
+
+
+REQUISITOS FUNCIONAIS:
+
+	1º na escolha das opções de linguagens e do nível de dificuldade use um objeto para armanezar as informações.
+	2º na section da geração do script utilize uma api IA para gerar o contexto e o script desse contexto. 
+
+		esta sessão será separada por 3 partes: contexto, script do contexto e a pergunta (o que esse código faz, o que você 			faria, aponte o erro desse código ... )
+
+	3º na section do resposta do usuário, use uma api IA para analisar a resposta referente ao script analisado.
+
+
+
+Backlog do design:
+
+	"Cada desafio finalizado em uma determinada linguagem e senioridade será encadeada uma por uma, formando uma linha de aprendizado que o profissional ou estudante possa verificar os desafios completos e os pendentes."
+
+Exemplo de linha de aprendizado (aqui representei o símbolo "|" para desafios finalizados e "/" para desafios pendentes:  
+		
+	Título:		</> Javascript - Júnior	
+	  
+			    #1 - Sistema de loja	 #2 - Sistema de banco
+			--------------------------- | --------------------------- /
+		
+	Título:		</> Javascript - Pleno	
+	  
+			    #1 - Banco de dados		 #2 - Site de barbearia 	#2 - Sistema fullstack
+			--------------------------- | --------------------------- |  --------------------------- /
+
+	
+	Na aba Histórico -> Desafios completos e Desafios pendentes:
+		Dentro de cada subtópico desse, terá uma Hierarquia na estrutura de organização de cada desafio: 
+			1º Nome da linguagem do desafio e Senioridade como titulo. Por exemplo: </> Javascript - Júnior
+			2º Nome do "id" seguido do nome do desafio. Por exemplo, #1 - Sistema de Login da Cafeteria ByteCoffee.
+	
+	Ao clicar em Desafios completos, será exibida uma linha de aprendizado como a do exemplo, mostrando todos os desafios 	completados.
+
+	Ao clicar em Desafios pendentes, será exibida todos os desafios pendentes com "id" e nome do desafio. O usuário deve ter a 	opção de finalizar o desafio ou excluir. 
+
+
+
+
+
+Nomes sugeridos:
+
+		next level - proximo nivel
+
+
+
+
+
+
+
+
+

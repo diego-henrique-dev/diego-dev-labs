@@ -21,10 +21,19 @@ export default function App() {
   }, [categoria])
 
 
+<<<<<<< HEAD
   const filtrados = dado.filter((item) =>
     item.title.toLowerCase().includes(filmes.toLowerCase())
   );
 
+=======
+      const filtrados = dado.filter( (item) =>
+      item.title.toLowerCase().includes(filmes.toLowerCase())
+    );
+
+    
+     
+>>>>>>> be1ec6f628faeda0fd795a6c8d9984969e319f92
   return (
     <>
       <S.sectionNav>
@@ -41,6 +50,7 @@ export default function App() {
         </nav>
       </S.sectionNav>
 
+<<<<<<< HEAD
       <S.sectionFilmes>
         {
 
@@ -51,6 +61,18 @@ export default function App() {
             </div>
           ))
         }
+=======
+    <S.sectionFilmes>
+      {
+      
+        filtrados.map((item) => (
+          <div>
+            <img src={item.posterURL} alt="" />
+            <figcaption>{item.title}</figcaption>
+          </div> 
+        ))
+      }
+>>>>>>> be1ec6f628faeda0fd795a6c8d9984969e319f92
       </S.sectionFilmes>
 
       <S.footer>

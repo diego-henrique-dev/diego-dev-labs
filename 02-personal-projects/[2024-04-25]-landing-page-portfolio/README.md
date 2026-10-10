@@ -19,7 +19,7 @@
   </tr>
 </table>
 
-Veja o site Portfólio acessando [aqui](https://mcdonalds-clone-theta.vercel.app/)
+Veja o site Portfólio acessando [aqui](https://landing-page-portfolio-khaki.vercel.app/)
 
 ## Sobre o projeto
 

@@ -7,7 +7,11 @@ justify-content: center;
 justify-content: space-between;
 align-items: center;
 position: fixed;
+<<<<<<< HEAD
 z-index: 999999;
+=======
+z-index: 100;
+>>>>>>> be1ec6f628faeda0fd795a6c8d9984969e319f92
 background-color: aliceblue;
 
 h2 {
@@ -54,8 +58,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-wrap: wrap;
-margin-top: 8%;
-padding-top: 2%;
+padding-top: 10%;
 background-color: black;
 
 .divPoster {
