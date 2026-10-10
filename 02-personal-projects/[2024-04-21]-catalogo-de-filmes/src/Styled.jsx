@@ -7,6 +7,7 @@ justify-content: center;
 justify-content: space-between;
 align-items: center;
 position: fixed;
+z-index: 999999;
 background-color: aliceblue;
 
 h2 {
@@ -57,7 +58,7 @@ margin-top: 8%;
 padding-top: 2%;
 background-color: black;
 
-div {
+.divPoster {
     max-width: calc(250px + 50px);
     display: flex;
     flex-direction: column;

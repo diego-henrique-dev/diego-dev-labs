@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Manutenção</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; }
+        .cartao { border: 1px solid #ccc; border-radius: 8px; padding: 15px; margin-bottom: 20px; background: #f9f9f9; }
+        input, select, button { margin: 5px 0; padding: 8px; width: 95%; }
+        button { cursor: pointer; background: #007bff; color: white; border: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Gestão de Equipamentos</h2>
+
+    <!-- 1. POST: Criar novo registro -->
+    <div class="cartao">
+        <h3>1. Dar Entrada em Serviço (POST)</h3>
+        <input type="text" id="nomeCliente" placeholder="Nome do Cliente">
+        <input type="text" id="modeloPc" placeholder="Modelo do PC (ex: Lenovo IdeaPad)">
+        <input type="text" id="problema" placeholder="Serviço (ex: Formatação, Troca de RAM)">
+        <button id="btnCriar">Cadastrar Serviço</button>
+        <p id="respostaParagrafo"></p>
+    </div>
+
+    <!-- 2. GET: Buscar todos os registros -->
+    <div class="cartao">
+        <h3>2. Listar Serviços na Bancada (GET)</h3>
+        <button id="btnListar" style="background: #28a745;">Buscar Lista no Servidor</button>
+        <ul id="listaServicos">
+        </ul>
+    </div>
+
+    <!-- 3. PATCH/PUT: Atualizar um registro -->
+    <div class="cartao">
+        <h3>3. Atualizar Status (PATCH)</h3>
+        <input type="number" id="idAtualizar" placeholder="ID do Serviço (ex: 1)">
+        <select id="novoStatus">
+            <option value="Na Bancada">Na Bancada</option>
+            <option value="Aguardando Peça">Aguardando Peça</option>
+            <option value="Finalizado">Finalizado</option>
+        </select>
+        <button id="btnAtualizar" style="background: #ffc107; color: black;">Salvar Novo Status</button>
+    </div>
+
+    <!-- 4. DELETE: Apagar um registro -->
+    <div class="cartao">
+        <h3>4. Entregar / Excluir (DELETE)</h3>
+        <input type="number" id="idDeletar" placeholder="ID do Serviço (ex: 1)">
+        <button id="btnDeletar" style="background: #dc3545;">Deletar Registro</button>
+    </div>
+
+    <!-- Log de mensagens do sistema -->
+    <p>Status do Sistema: <strong id="mensagemSistema">Aguardando ação...</strong></p>
+
+    <script src="logicaFront.js"></script>
+</body>
+</html>

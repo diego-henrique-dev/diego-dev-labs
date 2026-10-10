@@ -1,0 +1,33 @@
+Perfeito, só para resumir o que esta acontecendo:
+
+1º Foi criado um arquivo html para que o usuário possa digitar algo e enviar. 
+
+2º Foi criado um arquivo script.js que vai fazer a captura desses dados digitados e enviar para o servidor e ainda aguardar a resposta do servidor para assim então renderizar alguma frase no html. 
+
+Nesse arquivo script.js primeiro de tudo é selecionado o "botão" do html, porque ele é o elemento "final" de ação do usuário, ou seja, tudo que acontecer de ações no html, só vai ser executado depois que apertar o botão de enviar. 
+
+Depois que seleciono o botão e adiciono um evento de click nele para ficar "escutando" a ação de click, em seguida é selecionado os outros elementos "o valor do input" e o a "respostaTexto". 
+
+Em seguida, com tudo selecionado, crio a função utilizando "try e catch" para tratamento de erros, o qual, todo o código dentro de "try" terá a tentativa de execução, caso não tenha sucesso o bloco de código "catch" será executado informando o erro. No bloco "try" eu crio uma variável "resposta" que recebe uma função "fetch( )", dentro dessa função, ela recebe dois parâmetros, o primeiro parâmetro é o da localização onde o "fetch" vai "buscar" os dados e o segundo parâmetro é o objeto que o fetch está levando para esse endereço. Quando o fetch chega ao endereço passado "que é do servidor" o fetch entrega o objeto passado que tem como valor no "body"  o valor digitado no input. 
+
+Esse pedaço de código no try da constante "resposta" só será finalizada quando retornar alguma resposta do servidor. Isso acontece por conta do uso do "await" antes do fetch. Isso significa que o fetch vai no endereço passado, leva consigo o objeto com o valor digitado no input e "aguarda" uma resposta do próprio servidor do endereço onde ele foi, para que os outros blocos de códigos dentro do try possa prosseguir a execução. 
+
+Com o retorno do fetch armazenando na variável resposta, o fluxo do código dentro do try continua, indo para a constante "dadoServidor" que recebe a resposta do variável "resposta". 
+
+Com a resposta armazenada na constante "dadoServidor" o código seguindo é executado pegando a variável "elementoResposta" que renderiza no html a resposta enviada do servidor. 
+
+
+Agora, dentro do server.js "servidor" acontece a seguinte execução:
+
+Este arquivo server.js é um arquivo independente, separado do index.html e do script.js. No entanto, a única forma de se comunicar com ele é utilizando a porta, nesse caso, "3000" que o sistema operacional reserva para ele se comunicar. 
+
+Nas primeiras linhas de código desse arquivo é definido os códigos de configuração, ou seja, a importação da biblioteca "express" e do "cors". 
+
+Nas linhas seguintes, após a configuração inicial, é criada uma variável "app" que dentro dela tem o "express()" com todos os seus métodos. 
+
+Em seguida, é utilizado o método "post" dessa forma: "app.post( )" que dentro desse método post é passado dois argumentos: "o endereço/endpoint do servidor" 
+
+
+
+
+
