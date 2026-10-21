@@ -2,14 +2,14 @@
 
 document.getElementById('btnCriar').addEventListener('click', async () => {
 
-    const nomeCliente = document.getElementById('nomeCliente').value;
-    const modeloPC = document.getElementById('modeloPc').value;
+    const cliente = document.getElementById('nomeCliente').value;
+    const pc = document.getElementById('modeloPc').value;
     const problema = document.getElementById('problema').value;
     const respostaParagrafo = document.getElementById('respostaParagrafo');
 
     try {
 
-        const respostaPost = await fetch('http://localhost:3000/api/cadastro',
+        const respostaPost = await fetch('http://localhost:3000/api/servicos', 
             {
                 method: 'POST',
                 headers: {
@@ -17,21 +17,30 @@ document.getElementById('btnCriar').addEventListener('click', async () => {
                 },
                 body: JSON.stringify(
                     {
-                        nomeCliente: nomeCliente,
-                        modeloPC: modeloPC,
+                        cliente: cliente,
+                        pc: pc,
                         problema: problema
                     })
             });
 
+
         const respostaServidorPost = await respostaPost.json();
 
-        respostaParagrafo.innerText = "Cadastro realizado com sucesso!";
-
+        if (respostaServidorPost.erro == "Não tem dados para serem salvos!") {
+            respostaParagrafo.innerText = "Necessário preencher com os dados!";
+        } else if (respostaServidorPost.erro == "Erro ao salvar") {
+            respostaParagrafo.innerText = "Erro ao salvar no banco!";
+        } else if (respostaServidorPost.mensagem) {
+            respostaParagrafo.innerText = "Cadastro realizado com sucesso!";
+        }
+        
     } catch (erro) {
+        console.log("Erro ao conectar com o servidor: " , erro);
         respostaParagrafo.innerText = "Erro ao conectar com o servidor!";
-        console.error(erro);
     }
 })
+
+
 
 
 // GET - Buscar todos os registros
@@ -39,32 +48,39 @@ document.getElementById('btnCriar').addEventListener('click', async () => {
 document.getElementById('btnListar').addEventListener('click', async () => {
 
     const listaServico = document.getElementById('listaServicos');
+    const itemLista = document.createElement('li');
+    listaServico.appendChild(itemLista);
 
     try {
 
-        const respostaGet = await fetch('http://localhost:3000/api/lista');
+        const respostaGet = await fetch('http://localhost:3000/api/servicos');
 
         const respostaServidorGet = await respostaGet.json();
 
-        listaServico.innerText = "";
+        if (respostaServidorGet.erro == "Erro ao buscar os dados no banco:") {
+            
+            itemLista.innerText = "Erro ao buscar os dados no banco!";
 
-        respostaServidorGet.forEach((item) => {
+        } else if (respostaServidorGet.erro == "Banco de dados vazio!") {
+           
+            itemLista.innerText = "Banco de dados vazio!";
 
-            if (item.nomeCliente ==="" && item.modeloPC ==="" && item.problema === "") {
-                return
-            } else {
-                const itemLista = document.createElement('li');
-                const quebraLinha = document.createElement('br');
+        } else {
+            respostaServidorGet.forEach((item) => {
 
-                itemLista.innerText = `Cliente: ${item.nomeCliente} | Modelo: ${item.modeloPC} | Problema: ${item.problema}`;
-                listaServico.appendChild(itemLista);
-                listaServico.appendChild(quebraLinha);
-                
-            }
-        })
+                if (item.cliente === "" && item.pc === "" && item.problema === "") {
+                    return
+                } else {
+                    
+                    itemLista.innerText = `Cliente: ${item.cliente} | Modelo: ${item.pc} | Problema: ${item.problema}`;
+                  
+                }
+            })
+        }
 
     } catch (erro) {
-        listaServico.innerText = "Erro ao conectar com o servidor!";
-        console.error(erro)
+        console.log("Erro ao conectar com o servidor: ", erro);
+        itemLista.innerText = "Erro ao conectar com o servidor!";
+        
     }
 })
