@@ -9,11 +9,11 @@ document.getElementById('btnCriar').addEventListener('click', async () => {
 
     try {
 
-        const respostaPost = await fetch('http://localhost:3000/api/servicos', 
+        const respostaPost = await fetch('http://localhost:3000/api/servicos',
             {
                 method: 'POST',
                 headers: {
-                    "Content-Type": "application/json"
+                    "content-type": "application/json"
                 },
                 body: JSON.stringify(
                     {
@@ -33,9 +33,9 @@ document.getElementById('btnCriar').addEventListener('click', async () => {
         } else if (respostaServidorPost.mensagem) {
             respostaParagrafo.innerText = "Cadastro realizado com sucesso!";
         }
-        
+
     } catch (erro) {
-        console.log("Erro ao conectar com o servidor: " , erro);
+        console.log("Erro ao conectar com o servidor: ", erro);
         respostaParagrafo.innerText = "Erro ao conectar com o servidor!";
     }
 })
@@ -48,8 +48,7 @@ document.getElementById('btnCriar').addEventListener('click', async () => {
 document.getElementById('btnListar').addEventListener('click', async () => {
 
     const listaServico = document.getElementById('listaServicos');
-    const itemLista = document.createElement('li');
-    listaServico.appendChild(itemLista);
+
 
     try {
 
@@ -57,23 +56,28 @@ document.getElementById('btnListar').addEventListener('click', async () => {
 
         const respostaServidorGet = await respostaGet.json();
 
+
+
         if (respostaServidorGet.erro == "Erro ao buscar os dados no banco:") {
-            
+
             itemLista.innerText = "Erro ao buscar os dados no banco!";
 
         } else if (respostaServidorGet.erro == "Banco de dados vazio!") {
-           
+
             itemLista.innerText = "Banco de dados vazio!";
 
         } else {
+
+            listaServico.innerHTML = "";
+
             respostaServidorGet.forEach((item) => {
 
-                if (item.cliente === "" && item.pc === "" && item.problema === "") {
+                if (item.cliente === "" && item.pc === "" && item.problema === "" && item.status === "") {
                     return
                 } else {
-                    
-                    itemLista.innerText = `Cliente: ${item.cliente} | Modelo: ${item.pc} | Problema: ${item.problema}`;
-                  
+                    const itemLista = document.createElement('li');
+                    itemLista.innerText = `ID: ${item.id} | Cliente: ${item.cliente} | Modelo: ${item.pc} | Problema: ${item.problema} | Status: ${item.status}`;
+                    listaServico.appendChild(itemLista);
                 }
             })
         }
@@ -81,6 +85,59 @@ document.getElementById('btnListar').addEventListener('click', async () => {
     } catch (erro) {
         console.log("Erro ao conectar com o servidor: ", erro);
         itemLista.innerText = "Erro ao conectar com o servidor!";
-        
+
     }
-})
+});
+
+
+// PATCH - Atualizar o status 
+
+document.getElementById('btnAtualizar').addEventListener('click', async () => {
+
+    const ValueID = document.getElementById('idAtualizar').value;
+    const ValueStatus = document.getElementById('novoStatus').value;
+    const paragrafoRespostaPatch = document.getElementById('mensagemPatch');
+
+    try {
+
+        const updateStatus = await fetch('http://localhost:3000/api/patch/servicos',
+            {
+                method: 'PATCH',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(
+                    {
+                        id: ValueID,
+                        novoStatus: ValueStatus
+                    }
+                )
+            });
+
+        const respostaPatch = await updateStatus.json();
+
+        if (respostaPatch.erro === "Valor do ID vazio!") {
+
+            paragrafoRespostaPatch.innerText = "Erro! Valor do ID vazio.";
+
+        } else if (respostaPatch.erro === "Erro ao tentar atualizar!") {
+
+            paragrafoRespostaPatch.innerText = "Erro ao tentar atualizar no banco de dados!";
+
+        } else if (respostaPatch.erro === "Nenhum registro encontrado com esse ID.") {
+
+            paragrafoRespostaPatch.innerText = "Nenhum registro encontrado com esse ID.";
+        } else {
+            paragrafoRespostaPatch.innerText = "Status atualizado com sucesso!";
+        }
+
+
+
+    } catch (error) {
+        console.log(error);
+        paragrafoRespostaPatch.innerText = "Erro ao se conectar com o servidor!";
+    }
+});
+
+
+
+
+
