@@ -58,7 +58,7 @@ app.post('/api/servicos', (req, res) => {
                 return res.status(500).json({ erro: "Erro ao salvar" });
             }
 
-            console.log("Sucesso, dados recebidos do front-end: ", cliente, pc, problema)
+            console.log(`Sucesso, dados recebidos do front-end: Cliente: ${cliente} | PC: ${pc} | Problema: ${problema}`)
 
             res.json({ mensagem: "Serviço cadastrado com sucesso!" });
         });
@@ -127,10 +127,39 @@ app.patch('/api/patch/servicos', (req, res) => {
 
 });
 
+
+
+// Delete - deletar um serviço específico 
+
+app.delete('/api/servicos/:id', (req, res) => {
+
+    const id = req.params.id;
+
+    if (!id) {
+        console.log("Erro! ID está vazio.");
+        return res.status(400).json({ erro: "Erro! ID vazio." })
+    } else {
+
+        const comandoSQL = `DELETE FROM servicos WHERE id = ?`;
+
+        db.run(comandoSQL, [id], function (erro) {
+            if (erro) {
+                console.log("Erro ao deletar o serviço no banco: ", erro);
+                return res.status(500).json({ erro: "Erro ao deletar o serviço no banco." });
+            }
+            else if (this.changes === 0) {
+                console.log("ID não existe no banco para deletar.");
+                return res.status(404).json({ erro: "ID não existe no banco de dados." });
+            } else {
+
+                console.log(`Serviço com ID: ${id} excluido com sucesso do banco!`);
+                res.json({ mensagem: `Serviço com ID: ${id} excluido com sucesso do banco!` });
+            }
+        });
+    }
+});
+
+
 app.listen(PORTA, () => {
     console.log(`Servidor rodando em http://localhost:${PORTA}`);
 })
-
-
-
-

@@ -99,7 +99,7 @@ document.getElementById('btnAtualizar').addEventListener('click', async () => {
     const paragrafoRespostaPatch = document.getElementById('mensagemPatch');
 
     try {
-
+        
         const updateStatus = await fetch('http://localhost:3000/api/patch/servicos',
             {
                 method: 'PATCH',
@@ -129,8 +129,6 @@ document.getElementById('btnAtualizar').addEventListener('click', async () => {
             paragrafoRespostaPatch.innerText = "Status atualizado com sucesso!";
         }
 
-
-
     } catch (error) {
         console.log(error);
         paragrafoRespostaPatch.innerText = "Erro ao se conectar com o servidor!";
@@ -138,6 +136,36 @@ document.getElementById('btnAtualizar').addEventListener('click', async () => {
 });
 
 
+// DELETE - deletar um serviço específico 
 
+document.getElementById('btnDeletar').addEventListener('click', async ()=> {
 
+    const ValueID = document.getElementById('idDeletar').value;
+    const mensagemDelete = document.getElementById('mensagemDelete');
 
+    try {
+
+        const idURL = `http://localhost:3000/api/servicos/${ValueID}`;
+       
+        const deleteServico = await fetch(idURL, 
+            {
+                method: 'DELETE'
+            }
+        );
+
+        const respostaDeleteServico = await deleteServico.json();
+
+        if (respostaDeleteServico.erro === "Erro! ID vazio.") {
+            mensagemDelete.innerText = "Erro! ID vazio."
+        } else if (respostaDeleteServico.erro === "ID não existe no banco de dados.") {
+            mensagemDelete.innerText = "ID não existe no banco de dados.";
+        } else {
+        
+            mensagemDelete.innerText = respostaDeleteServico.mensagem;
+        }
+
+    } catch (erro) {
+        mensagemDelete.innerText = "Erro ao conectar com o servidor!";
+        console.error(erro);
+    }
+})
